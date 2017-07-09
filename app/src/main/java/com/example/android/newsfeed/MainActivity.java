@@ -14,8 +14,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.R.attr.duration;
 
 public class MainActivity extends AppCompatActivity
         implements LoaderCallbacks<List<News>>{
@@ -72,7 +76,7 @@ public class MainActivity extends AppCompatActivity
          */
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        final NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         // If there is a network connection, fetch data
         if (networkInfo != null && networkInfo.isConnected()) {
@@ -94,12 +98,11 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        // Refresh if connection lost
+        // Tap to try to restart fetching data
         mEmptyStateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoaderManager loaderManager = getLoaderManager();
-                loaderManager.initLoader(NEWS_LOADER_ID, null, MainActivity.this);
+                getLoaderManager().restartLoader(NEWS_LOADER_ID, null, MainActivity.this);
             }
         });
 
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLoadFinished(android.content.Loader<List<News>> loader, List<News> news) {
         // Hide loading indicator because the data has been loaded
-        View loadingIndicator = findViewById(R.id.loading_indicator);
+        final View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
 
         // Set empty state text to display "No news found."
@@ -139,7 +142,6 @@ public class MainActivity extends AppCompatActivity
         //Preview of the json used for parsing.
         TextView showJson = (TextView) findViewById(R.id.show_json);
         showJson.setText(QueryUtils.getJsonFile());
-
         /**
          * Connectivity loss while using app
          */
@@ -148,8 +150,8 @@ public class MainActivity extends AppCompatActivity
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         // If there is a network connection, fetch data
-        if (networkInfo != null && networkInfo.isConnected()) {
-         
+        if (networkInfo != null && !networkInfo.isConnected()) {
+
         } else {
             // Otherwise, display error
             // First, hide loading indicator so error message will be visible
@@ -157,9 +159,9 @@ public class MainActivity extends AppCompatActivity
 
             // Update empty state with no connection error message
             mEmptyStateTextView.setText(R.string.no_internet_connection);
+            // Refresh if connection lost
 
         }
-
     }
 
     /**
