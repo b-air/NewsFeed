@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import static android.R.attr.resource;
 
 /**
  * Created by bruno on 09/07/2017.
