@@ -2,7 +2,6 @@ package com.example.android.newsfeed;
 
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -106,7 +105,7 @@ public class QueryUtils {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving the JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -158,7 +157,7 @@ public class QueryUtils {
             JSONArray newsArray = jsonResponseObject.getJSONArray("results");
 
             // For result loop
-            for(int i = 0; i < newsArray.length(); i++){
+            for (int i = 0; i < newsArray.length(); i++) {
                 // get news at i
                 JSONObject currentNews = newsArray.getJSONObject(i);
 

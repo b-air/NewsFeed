@@ -91,7 +91,17 @@ public class MainActivity extends AppCompatActivity
 
             // Update empty state with no connection error message
             mEmptyStateTextView.setText(R.string.no_internet_connection);
+
         }
+
+        // Refresh if connection lost
+        mEmptyStateTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoaderManager loaderManager = getLoaderManager();
+                loaderManager.initLoader(NEWS_LOADER_ID, null, MainActivity.this);
+            }
+        });
 
     }
 
@@ -114,13 +124,13 @@ public class MainActivity extends AppCompatActivity
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
 
-        // Set empty state text to display "No earthquakes found."
+        // Set empty state text to display "No news found."
         mEmptyStateTextView.setText(R.string.no_news);
 
-        // Clear the adapter of previous earthquake data
+        // Clear the adapter of previous news data
         mAdapter.clear();
 
-        // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
+        // If there is a valid list of {@link New}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (news != null && !news.isEmpty()) {
             mAdapter.addAll(news);
@@ -129,6 +139,27 @@ public class MainActivity extends AppCompatActivity
         //Preview of the json used for parsing.
         TextView showJson = (TextView) findViewById(R.id.show_json);
         showJson.setText(QueryUtils.getJsonFile());
+
+        /**
+         * Connectivity loss while using app
+         */
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        // If there is a network connection, fetch data
+        if (networkInfo != null && networkInfo.isConnected()) {
+         
+        } else {
+            // Otherwise, display error
+            // First, hide loading indicator so error message will be visible
+            loadingIndicator.setVisibility(View.GONE);
+
+            // Update empty state with no connection error message
+            mEmptyStateTextView.setText(R.string.no_internet_connection);
+
+        }
+
     }
 
     /**
