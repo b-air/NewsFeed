@@ -1,6 +1,5 @@
 package com.example.android.newsfeed;
 
-
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -17,8 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 public class MainActivity extends AppCompatActivity
         implements LoaderCallbacks<List<News>>{
@@ -103,8 +100,7 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
-
-
+        //Loader in background
         return new NewsLoader(this, GUARDIAN_URL);
 
     }

@@ -155,12 +155,12 @@ public class QueryUtils {
             JSONObject jsonResponse = new JSONObject(newsJSON);
 
             //TODO: extract json array results
-            news.add(new News("SpaceX becomes first to re-fly used rocket", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
-            news.add(new News("SpaceX becomes first to re-fly used rocket", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
-            news.add(new News("SpaceX becomes first to re-fly used rocket", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
-            news.add(new News("SpaceX becomes first to re-fly used rocket", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
-            news.add(new News("SpaceX becomes first to re-fly used rocket", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
-            news.add(new News("SpaceX becomes first to re-fly used rocket", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
+            news.add(new News("SpaceX becomes first to re-fly used rocket", "Space", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
+            news.add(new News("SpaceX becomes first to re-fly used rocket", "Space", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
+            news.add(new News("SpaceX becomes first to re-fly used rocket", "Space", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
+            news.add(new News("SpaceX becomes first to re-fly used rocket", "Space", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
+            news.add(new News("SpaceX becomes first to re-fly used rocket", "Space", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
+            news.add(new News("SpaceX becomes first to re-fly used rocket", "Space", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
 
 
         } catch (JSONException e) {
