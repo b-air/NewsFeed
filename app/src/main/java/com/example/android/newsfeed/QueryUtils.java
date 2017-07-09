@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ListView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -153,15 +154,26 @@ public class QueryUtils {
         try {
             //Create Json Object
             JSONObject jsonResponse = new JSONObject(newsJSON);
+            JSONObject jsonResponseObject = jsonResponse.getJSONObject("response");
+            JSONArray newsArray = jsonResponseObject.getJSONArray("results");
 
-            //TODO: extract json array results
-            news.add(new News("SpaceX becomes first to re-fly used rocket", "Space", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
-            news.add(new News("SpaceX becomes first to re-fly used rocket", "Space", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
-            news.add(new News("SpaceX becomes first to re-fly used rocket", "Space", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
-            news.add(new News("SpaceX becomes first to re-fly used rocket", "Space", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
-            news.add(new News("SpaceX becomes first to re-fly used rocket", "Space", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
-            news.add(new News("SpaceX becomes first to re-fly used rocket", "Space", "2017-03-30", "https://www.theguardian.com/science/2017/mar/30/spacex-falcon-9-elon-musk-reusable-rocket"));
+            // For result loop
+            for(int i = 0; i < newsArray.length(); i++){
+                // get news at i
+                JSONObject currentNews = newsArray.getJSONObject(i);
 
+                //extract data
+                String title = currentNews.getString("webTitle");
+                String section = currentNews.getString("sectionName");
+                String date = currentNews.getString("webPublicationDate");
+                String url = currentNews.getString("webUrl");
+
+                //create news object
+                News newsFound = new News(title, section, date, url);
+
+                //add object to list
+                news.add(newsFound);
+            }
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
