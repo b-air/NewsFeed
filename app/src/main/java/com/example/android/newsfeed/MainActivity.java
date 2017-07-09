@@ -4,13 +4,15 @@ package com.example.android.newsfeed;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
@@ -51,7 +53,22 @@ public class MainActivity extends AppCompatActivity
 
         newsListView.setAdapter(mAdapter);
 
-        //TODO: add setOnItemClickListener
+        /**
+         * View Content in web browser
+         */
+        newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+
+                News currentNews = mAdapter.getItem(position);
+
+                Uri newsUri = Uri.parse(currentNews.getNewsUrl());
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, newsUri);
+
+                startActivity(websiteIntent);
+
+            }
+        });
 
         /**
          * Connectivity
